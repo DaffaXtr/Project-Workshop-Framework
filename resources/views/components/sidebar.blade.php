@@ -8,7 +8,7 @@
                   <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
-                  <span class="font-weight-bold mb-2">David Grey. H</span>
+                  <span class="font-weight-bold mb-2">Daffa Sujianto</span>
                   <span class="text-secondary text-small">Project Manager</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
@@ -20,13 +20,13 @@
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item {{ request()->routeIs('buku*') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->routeIs('buku.*') ? 'active' : '' }}">
               <a class="nav-link" href="{{ route('buku.index') }}">
                 <span class="menu-title">Buku</span>
                 <i class="mdi mdi-book-open menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item {{ request()->routeIs('kategori*') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->routeIs('kategori.*') ? 'active' : '' }}">
               <a class="nav-link" href="{{ route('kategori.index') }}">
                 <span class="menu-title">Kategori</span>
                 <i class="mdi mdi-tag menu-icon"></i>

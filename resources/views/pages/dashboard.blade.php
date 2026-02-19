@@ -3,11 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('style-page')
-<style>
-    .custom-card {
-        border-radius: 10px;
-    }
-</style>
+
 @endsection
 
 @section('content')

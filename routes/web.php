@@ -15,22 +15,32 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
-    Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
-    Route::post('/kategori/store', [KategoriController::class, 'store'])->name('kategori.store');
-    Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('kategori.edit');
-    Route::put('/kategori/update/{id}', [KategoriController::class, 'update'])->name('kategori.update');
-    Route::delete('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+    // Kategori
+    Route::prefix('kategori')->name('kategori.')->group(function () {
+        Route::get('/', [KategoriController::class, 'index'])->name('index');
+        Route::get('/create', [KategoriController::class, 'create'])->name('create');
+        Route::post('/store', [KategoriController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [KategoriController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [KategoriController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [KategoriController::class, 'destroy'])->name('destroy');
+    });
 
-    Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
-    Route::get('/buku/create', [BukuController::class, 'create'])->name('buku.create');
-    Route::post('/buku/store', [BukuController::class, 'store'])->name('buku.store');
-    Route::get('/buku/edit/{id}', [BukuController::class, 'edit'])->name('buku.edit');
-    Route::put('/buku/update/{id}', [BukuController::class, 'update'])->name('buku.update');
-    Route::delete('/buku/delete/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');  
+    // Buku
+    Route::prefix('buku')->name('buku.')->group(function () {
+        Route::get('/', [BukuController::class, 'index'])->name('index');
+        Route::get('/create', [BukuController::class, 'create'])->name('create');
+        Route::post('/store', [BukuController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [BukuController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [BukuController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [BukuController::class, 'destroy'])->name('destroy');
+    });
+
 });
+
 
 
 Route::middleware('auth')->group(function () {
