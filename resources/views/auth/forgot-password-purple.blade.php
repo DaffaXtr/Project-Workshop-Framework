@@ -23,6 +23,8 @@
                             <div class="form-group">
                                 <input type="email"
                                        name="email"
+                                       :value="old('email')"
+                                       id="email"
                                        class="form-control form-control-lg"
                                        placeholder="Email"
                                        required>

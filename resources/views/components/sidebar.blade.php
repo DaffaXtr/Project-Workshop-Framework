@@ -32,5 +32,11 @@
                 <i class="mdi mdi-tag menu-icon"></i>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('pdf.index') }}">
+                <span class="menu-title">Generate PDF</span>
+                <i class="mdi mdi-file menu-icon"></i>
+              </a>
+            </li>
           </ul>
         </nav>

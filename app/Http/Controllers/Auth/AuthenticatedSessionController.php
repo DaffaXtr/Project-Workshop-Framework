@@ -8,6 +8,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -22,13 +25,47 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    // public function store(LoginRequest $request): RedirectResponse
+    // {
+    //     $request->authenticate();
+
+    //     $request->session()->regenerate();
+
+    //     return redirect()->intended(route('dashboard', absolute: false));
+    // }
+
+    // Otp
+    public function store(Request $request)
     {
-        $request->authenticate();
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-        $request->session()->regenerate();
+        $user = User::where('email', $request->email)->first();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        if (!$user || !\Hash::check($request->password, $user->password)) {
+            return back()->withErrors([
+                'email' => 'Email atau password salah.',
+            ]);
+        }
+
+        // generate OTP
+        $otp = random_int(100000, 999999);
+
+        $user->update([
+            'otp' => $otp,
+            'otp_expires_at' => now()->addMinutes(5),
+        ]);
+
+        \Mail::raw("Kode OTP Anda: $otp", function ($message) use ($user) {
+            $message->to($user->email)
+                    ->subject('Kode OTP Login');
+        });
+
+        session(['otp_user_id' => $user->id]);
+
+        return redirect()->route('otp.form');
     }
 
     /**

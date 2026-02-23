@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'id_google',
+        'otp',
+        'otp_expires_at',
     ];
 
     /**
@@ -45,4 +48,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    protected $casts = [
+        'otp_expires_at' => 'datetime',
+    ];
 }

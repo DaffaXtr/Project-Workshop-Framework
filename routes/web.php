@@ -4,10 +4,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\OtpController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login-purple');
 });
 
 // Route::get('/dashboard', function () {
@@ -39,8 +43,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/delete/{id}', [BukuController::class, 'destroy'])->name('destroy');
     });
 
-});
+    // PDF
+    Route::get('/pdf', [PdfController::class, 'index'])->name('pdf.index');
+    Route::get('/pdf/download-landscape', [PdfController::class, 'landscape'])->name('pdf.landscape');
+    Route::get('/pdf/download-portrait', [PdfController::class, 'portrait'])->name('pdf.portrait');
 
+});
 
 
 Route::middleware('auth')->group(function () {
@@ -48,5 +56,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Google Authentication
+Route::get('/auth/google', [GoogleController::class, 'redirect'])->name('google.login');
+Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
+
+Route::get('/verify-otp', [OtpController::class, 'form'])->name('otp.form');
+Route::post('/verify-otp', [OtpController::class, 'verify'])->name('otp.verify');
 
 require __DIR__.'/auth.php';
