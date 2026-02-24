@@ -47,6 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pdf', [PdfController::class, 'index'])->name('pdf.index');
     Route::get('/pdf/download-landscape', [PdfController::class, 'landscape'])->name('pdf.landscape');
     Route::get('/pdf/download-portrait', [PdfController::class, 'portrait'])->name('pdf.portrait');
+    Route::get('/pdf/view', [PdfController::class, 'view'])->name('pdf.view');
 
 });
 

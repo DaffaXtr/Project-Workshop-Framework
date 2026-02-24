@@ -1,182 +1,127 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <title>Sertifikat</title>
     <style>
-        /* Pengaturan Kertas Dompdf */
         @page {
-            margin: 0;
+            margin: 40px;
         }
-        
+
         body {
+            background-image: url('{{ asset('assets/images/bg-sertif.jpeg') }}');
+            background-size: cover;
+            font-family: "Times New Roman", serif;
+            font-size: 14px;
             margin: 0;
             padding: 0;
-            font-family: 'Helvetica', 'Arial', sans-serif; /* Font standar agar aman di dompdf */
-            background-color: #fdfaf5;
         }
 
-        /* Pembungkus utama agar tidak meluap ke halaman 2 */
-        .cert-canvas {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 30px;
-            box-sizing: border-box;
+        .outer-border {
+            /* border: 6px solid #000080; */
+            padding: 10px;
         }
 
-        /* Bingkai Emas Luar */
-        .border-gold-outer {
-            border: 5px solid #c5a059;
-            height: 100%;
-            position: relative;
-            box-sizing: border-box;
-        }
-
-        /* Bingkai Tipis Dalam */
-        .border-inner-content {
-            border: 1px solid #c5a059;
-            margin: 10px;
-            height: calc(100% - 20px);
-            position: relative;
+        .inner-border {
+            /* border: 2px solid #d4af37; */
+            padding: 120px 0 0 0;
             text-align: center;
-            box-sizing: border-box;
-        }
-
-        /* Ornamen Sudut (Menggunakan karakter aman dompdf) */
-        .ornament {
-            position: absolute;
-            color: #c5a059;
-            font-size: 40px;
-        }
-        .tl { top: 5px; left: 10px; }
-        .tr { top: 5px; right: 10px; }
-        .bl { bottom: 5px; left: 10px; }
-        .br { bottom: 5px; right: 10px; }
-
-        /* Konten Teks */
-        .header {
-            margin-top: 60px;
         }
 
         .title {
-            font-size: 60px;
-            color: #3d2b1f;
-            margin: 0;
-            text-transform: uppercase;
+            font-size: 36px;
             font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
         }
 
         .subtitle {
-            font-size: 20px;
-            letter-spacing: 5px;
-            color: #3d2b1f;
-            margin-top: 5px;
-        }
-
-        .presented {
-            margin-top: 40px;
-            font-style: italic;
             font-size: 18px;
+            margin-bottom: 40px;
         }
 
         .name {
-            font-size: 70px;
-            color: #c5a059;
-            margin: 20px auto;
-            border-bottom: 2px solid #e0e0e0;
-            width: 75%;
-            padding-bottom: 5px;
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: underline;
+            margin: 20px 0;
         }
 
-        .desc {
+        .content-text {
             font-size: 16px;
-            color: #444;
-            line-height: 1.4;
-            width: 80%;
-            margin: 0 auto;
+            margin: 10px 0;
         }
 
-        /* Footer Tanda Tangan (Gunakan Table agar dompdf stabil) */
-        .footer-table {
-            width: 90%;
-            margin: 60px auto 0 auto;
-            border-collapse: collapse;
+        .signature-table {
+            width: 100%;
+            margin-top: 80px;
         }
 
-        .sig-cell {
-            width: 33%;
+        .signature-table td {
+            width: 50%;
             text-align: center;
-            vertical-align: bottom;
         }
 
-        .sig-line {
-            width: 80%;
-            border-top: 1px solid #c5a059;
-            margin: 0 auto 10px auto;
+        .line {
+            margin-top: 70px;
+            border-top: 1px solid #000;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .medal {
-            width: 70px;
-            height: 70px;
-            background-color: #c5a059;
-            border-radius: 50%;
-            margin: 0 auto;
-            border: 4px solid #b38f4d;
+        .date {
+            text-align: right;
+            margin-top: 40px;
+            font-size: 14px;
         }
-
-        .label-name { font-weight: bold; font-size: 16px; margin: 0; }
-        .label-title { font-size: 13px; color: #666; margin: 0; }
-
     </style>
 </head>
 <body>
 
-    <div class="cert-canvas">
-        <div class="border-gold-outer">
-            <div class="border-inner-content">
-                
-                <div class="ornament tl">✦</div>
-                <div class="ornament tr">✦</div>
-                <div class="ornament bl">✦</div>
-                <div class="ornament br">✦</div>
+<div class="outer-border">
 
-                <div class="header">
-                    <h1 class="title">CERTIFICATE</h1>
-                    <div class="subtitle">OF PARTICIPATION</div>
-                </div>
-
-                <p class="presented">This Certificate Is Presented To</p>
-                
-                <div class="name">Marceline Anderson</div>
-                
-                <p class="desc">
-                    Thank you for participating in the competition and winning <br>
-                    the photography competition 2026.
-                </p>
-
-                <table class="footer-table">
-                    <tr>
-                        <td class="sig-cell">
-                            <div class="sig-line"></div>
-                            <p class="label-name">Juliana Silva</p>
-                            <p class="label-title">Head of Marketing</p>
-                        </td>
-                        <td class="sig-cell">
-                            <div class="medal"></div>
-                        </td>
-                        <td class="sig-cell">
-                            <div class="sig-line"></div>
-                            <p class="label-name">Benjamin Shah</p>
-                            <p class="label-title">President Director</p>
-                        </td>
-                    </tr>
-                </table>
-
-            </div>
-        </div>
+    <div class="bg-image">
+        <img src="{{ public_path('assets/images/bg-sertif.jpeg') }}" alt="bg-sertif" style="width: 100%; height: auto; position: absolute; top: 0; left: 0; z-index: -1;">
     </div>
+
+    <div class="inner-border">
+
+        <div class="title">SERTIFIKAT</div>
+        <div class="subtitle">Certificate of Appreciation</div>
+
+        <div class="content-text">Diberikan kepada:</div>
+        <div class="name">Daffa Eka Sujianto</div>
+
+        <div class="content-text">
+            Atas partisipasinya dalam kegiatan
+        </div>
+
+        <div class="content-text">
+            <strong>Workshop Pemrograman Web</strong>
+        </div>
+
+        <div class="content-text">
+            yang diselenggarakan pada tanggal 24 Februari 2026
+        </div>
+
+        <table class="signature-table">
+            <tr>
+                <td>
+                    Ketua Panitia
+                    <div class="line"></div>
+                    (Daffa Eka Sujianto)
+                </td>
+                <td>
+                    Pembimbing
+                    <div class="line"></div>
+                    (Daffa Eka Sujianto)
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
 
 </body>
 </html>

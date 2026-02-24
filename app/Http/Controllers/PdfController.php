@@ -12,6 +12,11 @@ class PdfController extends Controller
         return view('pages.pdf.index');
     }
 
+    public function view()
+    {
+        return view('pages.pdf.sertif');
+    }
+
     public function portrait()
     {
         $pdf = pdf::loadView('pages.pdf.surat')
