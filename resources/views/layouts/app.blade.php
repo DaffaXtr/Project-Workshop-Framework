@@ -52,7 +52,7 @@
 <script src="{{ asset('assets/js/jquery.cookie.js') }}"></script>
 
 <!-- ================= JAVASCRIPT PAGE ================= -->
-@yield('js-page')
+@stack('script-page')
 
 </body>
 </html>

@@ -16,8 +16,8 @@
 </div>
 @endsection
 
-@section('js-page')
+@push('script-page')
 <script>
     console.log("Dashboard Loaded");
 </script>
-@endsection
+@endpush

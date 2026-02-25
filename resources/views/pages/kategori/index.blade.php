@@ -47,8 +47,8 @@
 </div>
 @endsection
 
-@section('js-page')
+@push('script-page')
 <script>
     console.log("Kategori Page Loaded");
 </script>
-@endsection
+@endpush

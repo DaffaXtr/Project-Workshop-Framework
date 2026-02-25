@@ -60,7 +60,9 @@
         </div>
     </div>
 </div>
+@endsection
 
+@push('script-page')
 <!-- Script OTP -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -92,4 +94,4 @@
         }
     });
 </script>
-@endsection
+@endpush

@@ -32,9 +32,9 @@
 </div>
 @endsection
 
-@section('js-page')
+@push('script-page')
 <!-- JS page disini -->
 <script>
     console.log("Edit Kategori Page Loaded");
 </script>
-@endsection
+@endpush
