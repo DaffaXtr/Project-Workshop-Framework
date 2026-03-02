@@ -5,7 +5,9 @@
     <title>Sertifikat</title>
     <style>
         @page {
-            margin: 40px;
+            /* margin: 40px; */
+            padding: 0;
+            margin: 0;
         }
 
         body {

@@ -32,10 +32,16 @@
                 <i class="mdi mdi-tag menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" {{ request()->routeIs('pdf.*') ? 'active' : '' }}>
               <a class="nav-link" href="{{ route('pdf.index') }}">
                 <span class="menu-title">Generate PDF</span>
                 <i class="mdi mdi-file menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ request()->routeIs('barang.*') ? 'active' : '' }}">
+              <a class="nav-link" href="{{ route('barang.index') }}">
+                <span class="menu-title">Barang</span>
+                <i class="mdi mdi-cube menu-icon"></i>
               </a>
             </li>
           </ul>

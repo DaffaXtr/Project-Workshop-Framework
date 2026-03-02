@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\OtpController;
 
@@ -48,6 +49,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pdf/download-landscape', [PdfController::class, 'landscape'])->name('pdf.landscape');
     Route::get('/pdf/download-portrait', [PdfController::class, 'portrait'])->name('pdf.portrait');
     Route::get('/pdf/view', [PdfController::class, 'view'])->name('pdf.view');
+
+    // Barang
+    Route::prefix('barang')->name('barang.')->group(function () {
+        Route::get('/', [BarangController::class, 'index'])->name('index');
+        Route::get('/create', [BarangController::class, 'create'])->name('create');
+        Route::post('/store', [BarangController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [BarangController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [BarangController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [BarangController::class, 'destroy'])->name('destroy');
+        // Route::get('/cetak-label/{id}', [BarangController::class, 'cetakLabel'])->name('cetakLabel');
+        Route::post('/cetak-massal', [BarangController::class, 'cetakMassal'])->name('cetakMassal');
+        Route::get('/view-cetak', [BarangController::class, 'viewCetak'])->name('viewCetak');
+    });
 
 });
 
