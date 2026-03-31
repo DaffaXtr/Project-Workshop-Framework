@@ -32,7 +32,7 @@
 
                             <div class="mt-3 d-grid gap-2">
                                 <button type="submit"
-                                        class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">
+                                        class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn btn-loader">
                                     RESET PASSWORD
                                 </button>
                             </div>

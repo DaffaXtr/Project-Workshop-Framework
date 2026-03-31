@@ -52,8 +52,8 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Update</button>
-                <a href="{{ route('buku.index') }}" class="btn btn-secondary">Kembali</a>
+                <button type="submit" class="btn btn-primary btn-loader" data-loader-text="Mengupdate...">Update</button>
+                <a href="{{ route('buku.index') }}" class="btn btn-secondary btn-link-loader">Kembali</a>
 
             </form>
 

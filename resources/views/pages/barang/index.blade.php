@@ -9,7 +9,7 @@
 @section('content')
 <div class="container">
     <h2>Daftar Barang</h2>
-    <a href="{{ route('barang.create') }}" class="btn btn-sm btn-success mb-3">
+    <a href="{{ route('barang.create') }}" class="btn btn-sm btn-success mb-3 btn-link-loader">
         Tambah Barang
     </a>
 </div>
@@ -55,7 +55,7 @@
                             <td>{{ $b->timestamp }}</td>
 
                             <td>
-                                <a href="{{ route('barang.edit', $b->id_barang) }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('barang.edit', $b->id_barang) }}" class="btn btn-sm btn-primary btn-link-loader">
                                     Edit
                                 </a>
 
@@ -64,8 +64,9 @@
                                     style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Yakin ingin menghapus barang ini?')">
+                                    <button type="submit" class="btn btn-sm btn-danger btn-loader"
+                                        data-confirm="Yakin ingin menghapus barang ini?"
+                                        data-loading-text="Menghapus...">
                                         Hapus
                                     </button>
                                 </form>
@@ -95,7 +96,7 @@
                         </div>
 
                         <div class="col-md-3 align-self-end">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary btn-loader">
                                 Cetak Label TNJ 108
                             </button>
                         </div>

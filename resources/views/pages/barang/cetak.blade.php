@@ -11,7 +11,7 @@
 @section('content')
 <div class="container">
     <h2>Daftar Barang</h2>
-    <a href="{{ route('barang.create') }}" class="btn btn-sm btn-success mb-3">Tambah Barang</a>
+    <a href="{{ route('barang.create') }}" class="btn btn-sm btn-success mb-3 btn-link-loader">Tambah Barang</a>
 </div>
 
 <div class="container">
@@ -49,8 +49,8 @@
                                     style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Yakin ingin menghapus barang ini?')">
+                                    <button type="submit" class="btn btn-sm btn-danger btn-loader"
+                                        data-confirm="Yakin ingin menghapus barang ini?">
                                         Hapus
                                     </button>
                                 </form>
@@ -60,7 +60,7 @@
                     </tbody>
                 </table>
                 <div class="mt-3 text-end">
-                    <a href="#" class="btn btn-sm btn-info">Download PDF</a>
+                    <a href="#" class="btn btn-sm btn-info btn-link-loader">Download PDF</a>
                 </div>
             </div>
         </div>

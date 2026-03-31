@@ -43,7 +43,7 @@
 
                             <div class="mt-4 d-grid gap-2">
                                 <button type="submit"
-                                        class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">
+                                        class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn btn-loader">
                                     VERIFIKASI OTP
                                 </button>
                             </div>

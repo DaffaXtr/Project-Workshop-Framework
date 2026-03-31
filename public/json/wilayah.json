@@ -1,0 +1,380 @@
+{
+  "provinsi": [
+    {
+      "id": 1,
+      "name": "Jawa Barat"
+    },
+    {
+      "id": 2,
+      "name": "Jawa Tengah"
+    },
+    {
+      "id": 3,
+      "name": "DKI Jakarta"
+    },
+    {
+      "id": 4,
+      "name": "Sumatera Utara"
+    },
+    {
+      "id": 5,
+      "name": "Sumatera Barat"
+    }
+  ],
+  "kota": [
+    {
+      "id": 1,
+      "provinsi_id": 1,
+      "name": "Bandung"
+    },
+    {
+      "id": 2,
+      "provinsi_id": 1,
+      "name": "Bogor"
+    },
+    {
+      "id": 3,
+      "provinsi_id": 1,
+      "name": "Depok"
+    },
+    {
+      "id": 4,
+      "provinsi_id": 2,
+      "name": "Semarang"
+    },
+    {
+      "id": 5,
+      "provinsi_id": 2,
+      "name": "Solo"
+    },
+    {
+      "id": 6,
+      "provinsi_id": 2,
+      "name": "Yogyakarta"
+    },
+    {
+      "id": 7,
+      "provinsi_id": 3,
+      "name": "Jakarta Pusat"
+    },
+    {
+      "id": 8,
+      "provinsi_id": 3,
+      "name": "Jakarta Selatan"
+    },
+    {
+      "id": 9,
+      "provinsi_id": 3,
+      "name": "Jakarta Timur"
+    },
+    {
+      "id": 10,
+      "provinsi_id": 4,
+      "name": "Medan"
+    },
+    {
+      "id": 11,
+      "provinsi_id": 4,
+      "name": "Binjai"
+    },
+    {
+      "id": 12,
+      "provinsi_id": 5,
+      "name": "Padang"
+    },
+    {
+      "id": 13,
+      "provinsi_id": 5,
+      "name": "Bukittinggi"
+    }
+  ],
+  "kecamatan": [
+    {
+      "id": 1,
+      "kota_id": 1,
+      "name": "Bandung Kulon"
+    },
+    {
+      "id": 2,
+      "kota_id": 1,
+      "name": "Bandung Wetan"
+    },
+    {
+      "id": 3,
+      "kota_id": 1,
+      "name": "Cicendo"
+    },
+    {
+      "id": 4,
+      "kota_id": 2,
+      "name": "Bogor Utara"
+    },
+    {
+      "id": 5,
+      "kota_id": 2,
+      "name": "Bogor Tengah"
+    },
+    {
+      "id": 6,
+      "kota_id": 2,
+      "name": "Bogor Selatan"
+    },
+    {
+      "id": 7,
+      "kota_id": 3,
+      "name": "Depok Baru"
+    },
+    {
+      "id": 8,
+      "kota_id": 3,
+      "name": "Depok Lama"
+    },
+    {
+      "id": 9,
+      "kota_id": 4,
+      "name": "Semarang Pusat"
+    },
+    {
+      "id": 10,
+      "kota_id": 4,
+      "name": "Semarang Barat"
+    },
+    {
+      "id": 11,
+      "kota_id": 4,
+      "name": "Semarang Timur"
+    },
+    {
+      "id": 12,
+      "kota_id": 5,
+      "name": "Solo Utara"
+    },
+    {
+      "id": 13,
+      "kota_id": 5,
+      "name": "Solo Tengah"
+    },
+    {
+      "id": 14,
+      "kota_id": 6,
+      "name": "Yogyakarta Utara"
+    },
+    {
+      "id": 15,
+      "kota_id": 6,
+      "name": "Yogyakarta Tengah"
+    },
+    {
+      "id": 16,
+      "kota_id": 6,
+      "name": "Yogyakarta Selatan"
+    },
+    {
+      "id": 17,
+      "kota_id": 7,
+      "name": "Jakarta Pusat"
+    },
+    {
+      "id": 18,
+      "kota_id": 8,
+      "name": "Kebayoran Baru"
+    },
+    {
+      "id": 19,
+      "kota_id": 8,
+      "name": "Kebayoran Lama"
+    },
+    {
+      "id": 20,
+      "kota_id": 9,
+      "name": "Kramat Jati"
+    },
+    {
+      "id": 21,
+      "kota_id": 9,
+      "name": "Makasar"
+    },
+    {
+      "id": 22,
+      "kota_id": 10,
+      "name": "Medan Barat"
+    },
+    {
+      "id": 23,
+      "kota_id": 10,
+      "name": "Medan Timur"
+    },
+    {
+      "id": 24,
+      "kota_id": 11,
+      "name": "Binjai Selatan"
+    },
+    {
+      "id": 25,
+      "kota_id": 12,
+      "name": "Padang Barat"
+    },
+    {
+      "id": 26,
+      "kota_id": 12,
+      "name": "Padang Timur"
+    },
+    {
+      "id": 27,
+      "kota_id": 13,
+      "name": "Bukittinggi"
+    }
+  ],
+  "kelurahan": [
+    {
+      "id": 1,
+      "kecamatan_id": 1,
+      "name": "Tegalega"
+    },
+    {
+      "id": 2,
+      "kecamatan_id": 1,
+      "name": "Andir"
+    },
+    {
+      "id": 3,
+      "kecamatan_id": 1,
+      "name": "Arjuna"
+    },
+    {
+      "id": 4,
+      "kecamatan_id": 2,
+      "name": "Karanganyar"
+    },
+    {
+      "id": 5,
+      "kecamatan_id": 2,
+      "name": "Babakan Penumang"
+    },
+    {
+      "id": 6,
+      "kecamatan_id": 2,
+      "name": "Cihekeul"
+    },
+    {
+      "id": 7,
+      "kecamatan_id": 3,
+      "name": "Panjungsari"
+    },
+    {
+      "id": 8,
+      "kecamatan_id": 3,
+      "name": "Saronge"
+    },
+    {
+      "id": 9,
+      "kecamatan_id": 3,
+      "name": "Citarum"
+    },
+    {
+      "id": 10,
+      "kecamatan_id": 4,
+      "name": "Semplak"
+    },
+    {
+      "id": 11,
+      "kecamatan_id": 4,
+      "name": "Sukasari"
+    },
+    {
+      "id": 12,
+      "kecamatan_id": 5,
+      "name": "Sempur"
+    },
+    {
+      "id": 13,
+      "kecamatan_id": 5,
+      "name": "Pabrik"
+    },
+    {
+      "id": 14,
+      "kecamatan_id": 5,
+      "name": "Perumahan"
+    },
+    {
+      "id": 15,
+      "kecamatan_id": 6,
+      "name": "Banjarsari"
+    },
+    {
+      "id": 16,
+      "kecamatan_id": 6,
+      "name": "Petukangan"
+    },
+    {
+      "id": 17,
+      "kecamatan_id": 7,
+      "name": "Depok Baru"
+    },
+    {
+      "id": 18,
+      "kecamatan_id": 7,
+      "name": "Pondok Cina"
+    },
+    {
+      "id": 19,
+      "kecamatan_id": 8,
+      "name": "Depok Lama"
+    },
+    {
+      "id": 20,
+      "kecamatan_id": 8,
+      "name": "Nomor"
+    },
+    {
+      "id": 21,
+      "kecamatan_id": 9,
+      "name": "Bugis"
+    },
+    {
+      "id": 22,
+      "kecamatan_id": 9,
+      "name": "Gajahmungkur"
+    },
+    {
+      "id": 23,
+      "kecamatan_id": 10,
+      "name": "Kembangarum"
+    },
+    {
+      "id": 24,
+      "kecamatan_id": 10,
+      "name": "Kraton"
+    },
+    {
+      "id": 25,
+      "kecamatan_id": 11,
+      "name": "Rejosari"
+    },
+    {
+      "id": 26,
+      "kecamatan_id": 11,
+      "name": "Karangturi"
+    },
+    {
+      "id": 27,
+      "kecamatan_id": 12,
+      "name": "Manahan"
+    },
+    {
+      "id": 28,
+      "kecamatan_id": 12,
+      "name": "Surakan"
+    },
+    {
+      "id": 29,
+      "kecamatan_id": 13,
+      "name": "Joyotakan"
+    },
+    {
+      "id": 30,
+      "kecamatan_id": 13,
+      "name": "Purwodinatan"
+    }
+  ]
+}

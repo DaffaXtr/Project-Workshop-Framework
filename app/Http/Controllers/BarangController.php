@@ -32,7 +32,7 @@ class BarangController extends Controller
         ]);
 
         return $pdf->setPaper('a4', 'portrait')
-                ->stream('label-massal.pdf');
+                ->stream('label.pdf');
     }
     
     public function create()

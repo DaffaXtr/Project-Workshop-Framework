@@ -6,6 +6,8 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\FormJsController;
+use App\Http\Controllers\KasirController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\OtpController;
 
@@ -63,8 +65,31 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/view-cetak', [BarangController::class, 'viewCetak'])->name('viewCetak');
     });
 
-});
+    Route::prefix('form-js')->name('form-js.')->group(function () {
+        Route::get('/', [FormJsController::class, 'index'])->name('index');
+        Route::get('/index2', [FormJsController::class, 'index2'])->name('index2');
+        Route::get('/index3', [FormJsController::class, 'index3'])->name('index3');
+        Route::get('/index4', [FormJsController::class, 'index4'])->name('index4');
+        Route::get('/index5', [FormJsController::class, 'index5'])->name('index5');
+        Route::get('/index6', [FormJsController::class, 'index6'])->name('index6');
+        Route::get('/index7', [FormJsController::class, 'index7'])->name('index7');
+        Route::get('/create', [FormJsController::class, 'create'])->name('create');
+        Route::post('/store', [FormJsController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [FormJsController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [FormJsController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [FormJsController::class, 'destroy'])->name('destroy');
+    });
 
+    // Kasir
+    Route::prefix('kasir')->name('kasir.')->group(function () {
+        Route::get('/', [KasirController::class, 'index'])->name('index');
+        Route::get('/ajax', [KasirController::class, 'ajaxVersion'])->name('ajax');
+        Route::get('/axios', [KasirController::class, 'axiosVersion'])->name('axios');
+        Route::get('/get-barang', [KasirController::class, 'getBarang'])->name('get-barang');
+        Route::post('/save-penjualan', [KasirController::class, 'savePenjualan'])->name('save-penjualan');
+    });
+
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

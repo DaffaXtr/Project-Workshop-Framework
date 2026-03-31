@@ -32,7 +32,7 @@
                             <td>Penghargaan</td>
                             <td>
                                 <a href="{{ route('pdf.landscape') }}" 
-                                   class="btn btn-sm btn-danger">
+                                   class="btn btn-sm btn-danger btn-link-loader">
                                    <i class="mdi mdi-file-pdf"></i> Download PDF
                                 </a>
                             </td>
@@ -46,7 +46,7 @@
                             <td>Dosen Teknik Informatika</td>
                             <td>
                                 <a href="{{ route('pdf.portrait') }}" 
-                                   class="btn btn-sm btn-danger">
+                                   class="btn btn-sm btn-danger btn-link-loader">
                                    <i class="mdi mdi-file-pdf"></i> Download PDF
                                 </a>
                             </td>

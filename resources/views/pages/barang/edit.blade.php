@@ -25,8 +25,8 @@
                         required>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Update</button>
-                <a href="{{ route('barang.index') }}" class="btn btn-secondary">Kembali</a>
+                <button type="submit" class="btn btn-primary btn-loader">Update</button>
+                <a href="{{ route('barang.index') }}" class="btn btn-secondary btn-link-loader">Kembali</a>
 
             </form>
 
