@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
 
@@ -44,7 +45,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !\Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return back()->withErrors([
                 'email' => 'Email atau password salah.',
             ]);
@@ -58,7 +59,7 @@ class AuthenticatedSessionController extends Controller
             'otp_expires_at' => now()->addMinutes(5),
         ]);
 
-        \Mail::raw("Kode OTP Anda: $otp", function ($message) use ($user) {
+        Mail::raw("Kode OTP Anda: $otp", function ($message) use ($user) {
             $message->to($user->email)
                     ->subject('Kode OTP Login');
         });
