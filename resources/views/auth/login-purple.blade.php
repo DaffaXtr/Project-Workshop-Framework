@@ -61,6 +61,14 @@
                                 </a>
                             </div>
 
+                            <div class="mb-2 d-grid gap-2">
+                                <a href="{{ route('customer.index') }}" 
+                                class="btn btn-block btn-light auth-form-btn">
+                                    <i class="mdi mdi-account me-2"></i> 
+                                    Login with guest account
+                                </a>
+                            </div>
+
                             <div class="text-center mt-4 font-weight-light"> Don't have an account? 
                                 <a href="{{ route('register') }}" class="text-primary">Create</a>
                             </div>

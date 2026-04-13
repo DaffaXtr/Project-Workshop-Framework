@@ -8,6 +8,10 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\FormJsController;
 use App\Http\Controllers\KasirController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PosController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\OtpController;
 
@@ -20,6 +24,13 @@ Route::get('/', function () {
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Customer routes (Tidak perlu login)
+Route::get('/customer', [PosController::class, 'index'])->name('customer.index');
+Route::get('/menu/{vendor}', [PosController::class, 'getMenu'])->name('customer.getMenu');
+Route::post('/checkout', [PosController::class, 'checkout'])->name('customer.checkout');
+Route::post('/payment/callback', [PaymentController::class, 'callback'])->name('payment.callback');
+Route::post('/payment/update-status/{orderId}', [PaymentController::class, 'updateStatus'])->name('payment.updateStatus');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -87,6 +98,35 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/axios', [KasirController::class, 'axiosVersion'])->name('axios');
         Route::get('/get-barang', [KasirController::class, 'getBarang'])->name('get-barang');
         Route::post('/save-penjualan', [KasirController::class, 'savePenjualan'])->name('save-penjualan');
+    });
+
+    // ==================== ADMIN ROUTES ====================
+    
+    // Vendor Management
+    Route::prefix('admin/vendor')->name('admin.vendor.')->group(function () {
+        Route::get('/', [AdminController::class, 'indexVendor'])->name('index');
+        Route::get('/create', [AdminController::class, 'createVendor'])->name('create');
+        Route::post('/', [AdminController::class, 'storeVendor'])->name('store');
+        Route::get('/{id}/edit', [AdminController::class, 'editVendor'])->name('edit');
+        Route::put('/{id}', [AdminController::class, 'updateVendor'])->name('update');
+        Route::delete('/{id}', [AdminController::class, 'destroyVendor'])->name('destroy');
+    });
+
+    // Menu Management
+    Route::prefix('admin/menu')->name('admin.menu.')->group(function () {
+        Route::get('/', [AdminController::class, 'indexMenu'])->name('index');
+        Route::get('/create', [AdminController::class, 'createMenu'])->name('create');
+        Route::post('/', [AdminController::class, 'storeMenu'])->name('store');
+        Route::get('/{id}/edit', [AdminController::class, 'editMenu'])->name('edit');
+        Route::put('/{id}', [AdminController::class, 'updateMenu'])->name('update');
+        Route::delete('/{id}', [AdminController::class, 'destroyMenu'])->name('destroy');
+    });
+
+    // Pesanan Management
+    Route::prefix('admin/pesanan')->name('admin.pesanan.')->group(function () {
+        Route::get('/', [AdminController::class, 'indexPesanan'])->name('index');
+        Route::get('/{id}', [AdminController::class, 'showPesanan'])->name('show');
+        Route::put('/{id}', [AdminController::class, 'updateStatusPesanan'])->name('update');
     });
 
 });

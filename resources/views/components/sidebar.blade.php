@@ -44,47 +44,62 @@
                 <i class="mdi mdi-cube menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item {{ request()->routeIs('form-js.index') ? 'active' : '' }}">
-              <a class="nav-link" href="{{ route('form-js.index') }}">
+            <li class="nav-item {{ request()->routeIs('form-js.*') ? 'active show' : '' }}">
+              <a class="nav-link" onclick="toggleSubmenu(event)" style="cursor: pointer;">
                 <span class="menu-title">Form JS</span>
-                <i class="mdi mdi-cube menu-icon"></i>
+                <i class="mdi mdi-chevron-down menu-icon"></i>
+              </a>
+              <div class="collapse {{ request()->routeIs('form-js.*') ? 'show' : '' }}" id="formjs-menu">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('form-js.index') ? 'active' : '' }}" href="{{ route('form-js.index') }}">Form JS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('form-js.index2') ? 'active' : '' }}" href="{{ route('form-js.index2') }}">Form JS 2</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('form-js.index3') ? 'active' : '' }}" href="{{ route('form-js.index3') }}">Form JS 3</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('form-js.index4') ? 'active' : '' }}" href="{{ route('form-js.index4') }}">Wilayah Ajax</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('form-js.index5') ? 'active' : '' }}" href="{{ route('form-js.index5') }}">Wilayah Axios</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('form-js.index6') ? 'active' : '' }}" href="{{ route('form-js.index6') }}">Barang Ajax</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('form-js.index7') ? 'active' : '' }}" href="{{ route('form-js.index7') }}">Barang Axios</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item {{ request()->routeIs('admin.menu*') ? 'active' : '' }}">
+              <a class="nav-link" href="{{ route('admin.menu.index') }}">
+                <span class="menu-title">Menu</span>
+                <i class="mdi mdi-book-open menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item {{ request()->routeIs('form-js.index2') ? 'active' : '' }}">
-              <a class="nav-link" href="{{ route('form-js.index2') }}">
-                <span class="menu-title">Form JS 2</span>
-                <i class="mdi mdi-cube menu-icon"></i>
+            <li class="nav-item {{ request()->routeIs('admin.pesanan*') ? 'active' : '' }}">
+              <a class="nav-link" href="{{ route('admin.pesanan.index') }}">
+                <span class="menu-title">Pesanan</span>
+                <i class="mdi mdi-basket menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item {{ request()->routeIs('form-js.index3') ? 'active' : '' }}">
-              <a class="nav-link" href="{{ route('form-js.index3') }}">
-                <span class="menu-title">Form JS 3</span>
-                <i class="mdi mdi-cube menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ request()->routeIs('form-js.index4') ? 'active' : '' }}">
-              <a class="nav-link" href="{{ route('form-js.index4') }}">
-                <span class="menu-title">Wilayah Ajax</span>
-                <i class="mdi mdi-cube menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ request()->routeIs('form-js.index5') ? 'active' : '' }}">
-              <a class="nav-link" href="{{ route('form-js.index5') }}">
-                <span class="menu-title">Wilayah Axios</span>
-                <i class="mdi mdi-cube menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ request()->routeIs('form-js.index6') ? 'active' : '' }}">
-              <a class="nav-link" href="{{ route('form-js.index6') }}">
-                <span class="menu-title">Barang Ajax</span>
-                <i class="mdi mdi-cube menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ request()->routeIs('form-js.index7') ? 'active' : '' }}">
-              <a class="nav-link" href="{{ route('form-js.index7') }}">
-                <span class="menu-title">Barang Axios</span>
-                <i class="mdi mdi-cube menu-icon"></i>
+            <li class="nav-item {{ request()->routeIs('admin.vendor*') ? 'active' : '' }}">
+              <a class="nav-link" href="{{ route('admin.vendor.index') }}">
+                <span class="menu-title">Vendor</span>
+                <i class="mdi mdi-account-circle menu-icon"></i>
               </a>
             </li>
           </ul>
         </nav>
+        
+        <script>
+          function toggleSubmenu(event) {
+            event.preventDefault();
+            const submenu = document.getElementById('formjs-menu');
+            submenu.classList.toggle('show');
+          }
+        </script>
