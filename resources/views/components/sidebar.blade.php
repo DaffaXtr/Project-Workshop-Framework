@@ -93,6 +93,25 @@
                 <i class="mdi mdi-account-circle menu-icon"></i>
               </a>
             </li>
+            <li class="nav-item {{ request()->routeIs('admin.customer.*') ? 'active show' : '' }}">
+              <a class="nav-link" onclick="toggleSubmenuCustomer(event)" style="cursor: pointer;">
+                <span class="menu-title">Customer</span>
+                <i class="mdi mdi-chevron-down menu-icon"></i>
+              </a>
+              <div class="collapse {{ request()->routeIs('admin.customer.*') ? 'show' : '' }}" id="customer-menu">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.customer.index') ? 'active' : '' }}" href="{{ route('admin.customer.index') }}">Data Customer</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('camera.blob.index') ? 'active' : '' }}" href="{{ route('camera.blob.index') }}">Tambah Customer 1</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('camera.path.index') ? 'active' : '' }}" href="{{ route('camera.path.index') }}">Tambah Customer 2</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
           </ul>
         </nav>
         
@@ -100,6 +119,11 @@
           function toggleSubmenu(event) {
             event.preventDefault();
             const submenu = document.getElementById('formjs-menu');
+            submenu.classList.toggle('show');
+          }
+          function toggleSubmenuCustomer(event) {
+            event.preventDefault();
+            const submenu = document.getElementById('customer-menu');
             submenu.classList.toggle('show');
           }
         </script>

@@ -97,8 +97,12 @@
                                         <div class="nama">
                                             {{ $barang[$dataIndex]->nama }}
                                         </div>
-                                        <div class="kode">
+                                        <!-- <div class="kode">
                                             Id: {{ $barang[$dataIndex]->id_barang }}
+                                        </div> -->
+                                        <div class="barcode">
+                                            <img src="{{ $barang[$dataIndex]->barcode_image }}" alt="Barcode"
+                                                style="margin-top: 0.5mm; max-width: 100%; height: auto;">  
                                         </div>
                                         <div class="harga">
                                             Rp{{ number_format($barang[$dataIndex]->harga, 0, ',', '.') }}

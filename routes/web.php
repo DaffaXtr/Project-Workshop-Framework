@@ -12,6 +12,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CameraBlobController;
+use App\Http\Controllers\CameraPathController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\OtpController;
 
@@ -29,6 +31,7 @@ Route::get('/', function () {
 Route::get('/customer', [PosController::class, 'index'])->name('customer.index');
 Route::get('/menu/{vendor}', [PosController::class, 'getMenu'])->name('customer.getMenu');
 Route::post('/checkout', [PosController::class, 'checkout'])->name('customer.checkout');
+Route::get('/qrcode/{pesananId}', [PosController::class, 'generateQrCode'])->name('qrcode.generate');
 Route::post('/payment/callback', [PaymentController::class, 'callback'])->name('payment.callback');
 Route::post('/payment/update-status/{orderId}', [PaymentController::class, 'updateStatus'])->name('payment.updateStatus');
 
@@ -98,6 +101,32 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/axios', [KasirController::class, 'axiosVersion'])->name('axios');
         Route::get('/get-barang', [KasirController::class, 'getBarang'])->name('get-barang');
         Route::post('/save-penjualan', [KasirController::class, 'savePenjualan'])->name('save-penjualan');
+    });
+
+    // Customer Data Management
+    Route::prefix('admin/customer')->name('admin.customer.')->group(function () {
+        Route::get('/', [CustomerController::class, 'index'])->name('index');
+        Route::get('/create', [CustomerController::class, 'create'])->name('create');
+        Route::post('/store', [CustomerController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [CustomerController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('destroy');
+        Route::get('/customer/foto/{id}', function($id) {
+            $c = \App\Models\Customer::findOrFail($id);
+
+            return response($c->foto_blob)
+                ->header('Content-Type', 'image/png');
+        });
+    });
+
+    Route::prefix('camera/path')->name('camera.path.')->group(function () {
+        Route::get('/', [CameraPathController::class, 'index'])->name('index');
+        Route::post('/store', [CameraPathController::class, 'store'])->name('store');
+    });
+
+    Route::prefix('camera/blob')->name('camera.blob.')->group(function () {
+        Route::get('/', [CameraBlobController::class, 'index'])->name('index');
+        Route::post('/store', [CameraBlobController::class, 'store'])->name('store');
     });
 
     // ==================== ADMIN ROUTES ====================

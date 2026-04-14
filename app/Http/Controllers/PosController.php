@@ -9,6 +9,7 @@ use App\Models\DetailPesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Midtrans\Snap;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PosController extends Controller
 {
@@ -97,6 +98,27 @@ class PosController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error checkout: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function generateQrCode($pesananId)
+    {
+        try {
+            $qr = QrCode::format('svg')
+                ->size(100)
+                ->margin(1)
+                ->generate('PES-' . $pesananId);
+
+            return response($qr)
+                ->header('Content-Type', 'image/svg+xml')
+                ->header('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
+        } catch (\Exception $e) {
+            Log::error('QR Code generation error: ' . $e->getMessage());
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Error generating QR Code: ' . $e->getMessage()
             ], 500);
         }
     }
