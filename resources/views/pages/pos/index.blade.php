@@ -3,6 +3,16 @@
 @section('title', 'POS - Pemesanan')
 
 @section('content')
+<div class="row mb-3">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4>Sistem Pemesanan</h4>
+            <a href="{{ route('receipt.history') }}" class="btn btn-info btn-sm">
+                Riwayat Pesanan
+            </a>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-6">
         <div class="card">
@@ -286,9 +296,30 @@ function displayReceipt(data) {
         time: now.toLocaleTimeString('id-ID')
     };
     
+    // SAVE TO LOCALSTORAGE - Track order history
+    saveOrderToHistory(data.pesanan_id);
+    
     // Show modal
     const modal = new bootstrap.Modal(document.getElementById('ReceiptModal'));
     modal.show();
+}
+
+// Function untuk save pesanan ke localStorage
+function saveOrderToHistory(pesananId) {
+    let orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+    
+    // Jika pesanan belum ada di history, tambahkan
+    if (!orderHistory.includes(pesananId)) {
+        orderHistory.unshift(pesananId); // Add to beginning
+        
+        // Limit history to 50 items
+        if (orderHistory.length > 50) {
+            orderHistory = orderHistory.slice(0, 50);
+        }
+        
+        localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+        console.log('Order saved to history:', pesananId);
+    }
 }
 
 function printReceipt() {

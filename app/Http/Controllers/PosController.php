@@ -108,7 +108,7 @@ class PosController extends Controller
             $qr = QrCode::format('svg')
                 ->size(100)
                 ->margin(1)
-                ->generate('PES-' . $pesananId);
+                ->generate($pesananId);
 
             return response($qr)
                 ->header('Content-Type', 'image/svg+xml')
@@ -119,6 +119,95 @@ class PosController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error generating QR Code: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // Halaman history pesanan customer
+    public function history()
+    {
+        return view('pages.pos.history');
+    }
+
+    // API untuk get detail pesanan berdasarkan ID
+    public function getReceiptDetail($pesananId)
+    {
+        try {
+            $pesanan = Pesanan::with('details.menu')->find($pesananId);
+            
+            if (!$pesanan) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Pesanan tidak ditemukan'
+                ], 404);
+            }
+
+            $details = $pesanan->details->map(function ($detail) {
+                return [
+                    'idmenu' => $detail->idmenu,
+                    'nama_menu' => $detail->menu->nama_menu ?? 'Unknown Menu',
+                    'harga' => $detail->harga,
+                    'qty' => $detail->jumlah,
+                    'subtotal' => $detail->subtotal
+                ];
+            });
+
+            return response()->json([
+                'success' => true,
+                'pesanan_id' => $pesanan->idpesanan,
+                'nama' => $pesanan->nama,
+                'timestamp' => $pesanan->timestamp,
+                'total' => $pesanan->total,
+                'status_bayar' => $pesanan->status_bayar,
+                'transaction_id' => $pesanan->transaction_id,
+                'items' => $details
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Get receipt detail error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Error fetching receipt: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // API untuk get history pesanan dari array IDs
+    public function getOrdersHistory(Request $request)
+    {
+        try {
+            $pesananIds = $request->pesanan_ids ?? [];
+            
+            if (empty($pesananIds)) {
+                return response()->json([
+                    'success' => true,
+                    'orders' => []
+                ]);
+            }
+
+            $orders = Pesanan::whereIn('idpesanan', $pesananIds)
+                ->orderBy('timestamp', 'DESC')
+                ->get()
+                ->map(function ($pesanan) {
+                    return [
+                        'idpesanan' => $pesanan->idpesanan,
+                        'nama' => $pesanan->nama,
+                        'timestamp' => $pesanan->timestamp,
+                        'total' => $pesanan->total,
+                        'status_bayar' => $pesanan->status_bayar,
+                        'transaction_id' => $pesanan->transaction_id,
+                        'status_message' => $pesanan->status_message
+                    ];
+                });
+
+            return response()->json([
+                'success' => true,
+                'orders' => $orders
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Get history error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Error fetching history: ' . $e->getMessage()
             ], 500);
         }
     }

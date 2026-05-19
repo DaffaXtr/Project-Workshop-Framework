@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Barang;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Picqer\Barcode\BarcodeGeneratorPNG;
+use Illuminate\Support\Facades\Log;
 
 class BarangController extends Controller
 {
@@ -92,5 +93,27 @@ class BarangController extends Controller
     {
         $barang = Barang::all();
         return view('pages.barang.label-massal', compact('barang'));
+    }
+
+    public function scan()
+    {
+        return view('pages.scan.barcode');
+    }
+
+    public function getByBarcode(Request $request)
+    {
+        $barang = Barang::where('id_barang', $request->barcode)->first();
+
+        if (!$barang) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Barang tidak ditemukan'
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $barang
+        ]);
     }
 }

@@ -14,6 +14,9 @@ use App\Http\Controllers\PosController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CameraBlobController;
 use App\Http\Controllers\CameraPathController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\LokasiTokoController;
+use App\Http\Controllers\KunjunganTokoController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\OtpController;
 
@@ -34,6 +37,9 @@ Route::post('/checkout', [PosController::class, 'checkout'])->name('customer.che
 Route::get('/qrcode/{pesananId}', [PosController::class, 'generateQrCode'])->name('qrcode.generate');
 Route::post('/payment/callback', [PaymentController::class, 'callback'])->name('payment.callback');
 Route::post('/payment/update-status/{orderId}', [PaymentController::class, 'updateStatus'])->name('payment.updateStatus');
+Route::get('/receipt-history', [PosController::class, 'history'])->name('receipt.history');
+Route::get('/receipt/{pesananId}', [PosController::class, 'getReceiptDetail'])->name('receipt.detail');
+Route::post('/orders-history', [PosController::class, 'getOrdersHistory'])->name('orders.history');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -77,6 +83,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Route::get('/cetak-label/{id}', [BarangController::class, 'cetakLabel'])->name('cetakLabel');
         Route::post('/cetak-massal', [BarangController::class, 'cetakMassal'])->name('cetakMassal');
         Route::get('/view-cetak', [BarangController::class, 'viewCetak'])->name('viewCetak');
+        Route::get('/scan-barang', [BarangController::class, 'scan'])->name('scan');
+        Route::post('/scan-barang/get', [BarangController::class, 'getByBarcode'])->name('getByBarcode');
     });
 
     Route::prefix('form-js')->name('form-js.')->group(function () {
@@ -158,6 +166,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/{id}', [AdminController::class, 'updateStatusPesanan'])->name('update');
     });
 
+    Route::get('/scan-pesanan', [PesananController::class, 'index'])->name('pesanan.index');
+    Route::post('/scan-pesanan/get', [PesananController::class, 'getDetail'])->name('pesanan.getDetail');
+
+    // Lokasi Toko
+    Route::prefix('lokasi-toko')->name('lokasi-toko.')->group(function () {
+        Route::get('/', [LokasiTokoController::class, 'index'])->name('index');
+        Route::get('/create', [LokasiTokoController::class, 'create'])->name('create');
+        Route::post('/', [LokasiTokoController::class, 'store'])->name('store');
+        Route::get('/{barcode}/qrcode', [LokasiTokoController::class, 'qrcode'])->name('qrcode');
+        Route::get('/{barcode}/edit', [LokasiTokoController::class, 'edit'])->name('edit');
+        Route::put('/{barcode}', [LokasiTokoController::class, 'update'])->name('update');
+        Route::delete('/{barcode}', [LokasiTokoController::class, 'destroy'])->name('destroy');
+    });
+
+    // Kunjungan Toko
+    Route::prefix('kunjungan-toko')->name('kunjungan-toko.')->group(function () {
+        Route::get('/', [KunjunganTokoController::class, 'index'])->name('index');
+        Route::get('/get-toko/{barcode}', [KunjunganTokoController::class, 'getToko'])->name('get-toko');
+        Route::post('/cek', [KunjunganTokoController::class, 'cekLokasi'])->name('cek');
+    });
 });
 
 Route::middleware('auth')->group(function () {

@@ -112,6 +112,41 @@
                 </ul>
               </div>
             </li>
+            <li class="nav-item {{ request()->routeIs('barang.scan') ? 'active' : '' }}">
+              <a class="nav-link" href="{{ route('barang.scan') }}">
+                <span class="menu-title">Scan Barcode</span>
+                <i class="mdi mdi-barcode menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ request()->routeIs('pesanan.index') ? 'active' : '' }}">
+              <a class="nav-link" href="{{ route('pesanan.index') }}">
+                <span class="menu-title">Scan QR Code</span>
+                <i class="mdi mdi-qrcode menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ request()->routeIs('lokasi-toko.*') ? 'active' : '' }}">
+                <a class="nav-link"
+                  href="{{ route('lokasi-toko.index') }}">
+
+                    <span class="menu-title">
+                        Lokasi Toko
+                    </span>
+
+                    <i class="mdi mdi-map-marker menu-icon"></i>
+                </a>
+            </li>
+
+            <li class="nav-item {{ request()->routeIs('kunjungan-toko.*') ? 'active' : '' }}">
+                <a class="nav-link"
+                  href="{{ route('kunjungan-toko.index') }}">
+
+                    <span class="menu-title">
+                        Kunjungan Toko
+                    </span>
+
+                    <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                </a>
+            </li>
           </ul>
         </nav>
         
