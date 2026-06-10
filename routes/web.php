@@ -17,10 +17,12 @@ use App\Http\Controllers\CameraPathController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\LokasiTokoController;
 use App\Http\Controllers\KunjunganTokoController;
+use App\Http\Controllers\AntrianController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\OtpController;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
 
 Route::get('/', function () {
     return view('auth.login-purple');
@@ -40,6 +42,36 @@ Route::post('/payment/update-status/{orderId}', [PaymentController::class, 'upda
 Route::get('/receipt-history', [PosController::class, 'history'])->name('receipt.history');
 Route::get('/receipt/{pesananId}', [PosController::class, 'getReceiptDetail'])->name('receipt.detail');
 Route::post('/orders-history', [PosController::class, 'getOrdersHistory'])->name('orders.history');
+
+Route::get('/guest', [AntrianController::class, 'guest'])->name('guest');
+Route::post('/guest/store', [AntrianController::class, 'store'])->name('guest.store');
+
+// Debug routes
+Route::get('/antrian-debug', function() {
+    $queues = Cache::get('queues', []);
+    $lastNumber = Cache::get('last_number', 0);
+    return response()->json([
+        'queues' => $queues,
+        'lastNumber' => $lastNumber,
+        'count' => count($queues)
+    ]);
+});
+
+Route::get('/antrian-reset-cache', function() {
+    Cache::forget('queues');
+    Cache::forget('last_number');
+    return response()->json(['success' => true, 'message' => 'Cache reset']);
+});
+
+Route::get('/admin', [AntrianController::class, 'admin'])->name('admin');
+Route::post('/admin/panggil', [AntrianController::class, 'panggil'])->name('admin.panggil');
+Route::post('/antrian/terlambat', [AntrianController::class, 'terlambat'])->name('antrian.terlambat');
+Route::post('/antrian/panggil-terlambat', [AntrianController::class, 'panggilTerlambat'])->name('antrian.panggil-terlambat');
+Route::post('/antrian/reset', [AntrianController::class, 'reset'])->name('antrian.reset');
+
+Route::get('/papan', [AntrianController::class, 'papan'])->name('papan');
+
+Route::get('/sse/antrian', [AntrianController::class, 'stream'])->name('sse.antrian');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 

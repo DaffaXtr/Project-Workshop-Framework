@@ -6,19 +6,31 @@ Panduan singkat untuk memulai dengan cepat.
 
 ## 🚀 Setup Awal (5 Menit)
 
-### 1. Install Dependencies
+### 1. Clone Project
+```bash
+# Clone dari repository
+git clone <repository-url> koleksi_buku
+cd koleksi_buku
+```
+
+Atau jika project sudah ada:
+```bash
+cd d:\WS FRAMEWORK\koleksi_buku
+```
+
+### 2. Install Dependencies
 ```bash
 composer install
 npm install
 ```
 
-### 2. Setup .env
+### 3. Setup .env
 ```bash
 copy .env.example .env
 php artisan key:generate
 ```
 
-### 3. Konfigurasi Database
+### 4. Konfigurasi Database
 Edit `.env`:
 ```env
 DB_CONNECTION=mysql
@@ -28,7 +40,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### 4. Run Migration & Server
+### 5. Run Migration & Server
 ```bash
 php artisan migrate
 npm run build
